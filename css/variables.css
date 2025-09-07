@@ -1,0 +1,63 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* Colores principales */
+    --primary: #e74c3c;
+    --primary-dark: #c0392b;
+    --primary-light: #ff6b6b;
+    --secondary: #c44569;
+    --accent: #ff6b6b;
+    
+    /* Colores neutros */
+    --dark: #2c3e50;
+    --gray: #7f8c8d;
+    --light-gray: #ecf0f1;
+    --white: #ffffff;
+    
+    /* Colores semánticos */
+    --success: #2ecc71;
+    --success-light: #27ae60;
+    --info: #3498db;
+    --info-light: #2980b9;
+    --warning: #f39c12;
+    --warning-light: #e67e22;
+    --purple: #9b59b6;
+    --purple-light: #8e44ad;
+    
+    /* Sombras */
+    --shadow: 0 4px 6px rgba(231, 76, 60, 0.1);
+    --shadow-lg: 0 10px 25px rgba(231, 76, 60, 0.15);
+    --shadow-xl: 0 15px 35px rgba(231, 76, 60, 0.12);
+    
+    /* Tipografía */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+    
+    /* Espaciado */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+    --spacing-xxl: 40px;
+    
+    /* Border radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 15px;
+    --radius-xl: 20px;
+    --radius-full: 50px;
+    
+    /* Transiciones */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Variables para dark mode (futuro) */
+[data-theme="dark"] {
+    --dark: #ffffff;
+    --gray: #a0a0a0;
+    --white: #1a1a1a;
+    --light-gray: #2d2d2d;
+}

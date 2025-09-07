@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial WhatsApp Automático con Prime Sender - TuMatch Inmobiliario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
+            --primary-light: #ff6b6b;
+            --secondary: #c44569;
+            --accent: #ff6b6b;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --light-gray: #ecf0f1;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(231, 76, 60, 0.1);
+            --shadow-lg: 0 10px 25px rgba(231, 76, 60, 0.15);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, #8B5FBF 70%, #667eea 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, var(--primary) 70%, var(--secondary) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            color: white;
+            padding: 50px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .header p {
+            font-size: 18px;
+            opacity: 0.95;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .back-panel-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.18);
+            transition: background 0.3s, transform 0.3s;
+            border: none;
+        }
+        .back-panel-btn:hover {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            transform: scale(1.04) translateY(-2px);
+        }
+        .intro-section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .intro-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .intro-text {
+            color: var(--gray);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .step-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+            transform: translateY(0);
+        }
+        .step-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.15),
+                        0 8px 32px rgba(0, 0, 0, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .step-accent {
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+        }
+        .step-body {
+            padding: 30px;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, var(--primary) 100%);
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            flex-shrink: 0;
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.15),
+                        -4px -4px 8px rgba(255, 255, 255, 0.3),
+                        inset 2px 2px 4px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.4;
+            flex: 1;
+        }
+        .step-content {
+            margin-left: 70px;
+        }
+        .step-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        .step-list li {
+            padding: 12px 0 12px 30px;
+            position: relative;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        .step-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            top: 12px;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .sub-list {
+            margin-left: 20px;
+            margin-top: 10px;
+            list-style: none;
+        }
+        .sub-list li {
+            padding: 8px 0 8px 25px;
+            font-size: 15px;
+            position: relative;
+        }
+        .sub-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, var(--primary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 20px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.15),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .link-button:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 12px 25px rgba(231, 76, 60, 0.25),
+                        12px 12px 20px rgba(0, 0, 0, 0.15),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .link-button:hover::before {
+            left: 100%;
+        }
+        .warning-box {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .warning-box strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .tip-box {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(196, 69, 105, 0.05) 100%);
+            border: 2px solid rgba(231, 76, 60, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .tip-box strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .success-box {
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid #2ecc71;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .success-box strong {
+            color: #27ae60;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .step-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #e1e8ed;
+        }
+        .summary-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+        }
+        .summary-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .summary-text {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #34495e 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .footer-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+        .footer-item a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-item a:hover {
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+                flex-direction: column;
+            }
+            .step-content {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            .step-header {
+                flex-wrap: wrap;
+            }
+            .step-number {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            .step-title {
+                font-size: 18px;
+            }
+            .link-button {
+                width: 100%;
+                justify-content: center;
+            }
+            .step-image {
+                margin: 15px 0;
+            }
+            .back-button-container {
+                position: relative;
+                margin-bottom: 25px;
+            }
+            .back-panel-btn {
+                width: 100%;
+                font-size: 14px;
+                padding: 12px 20px 12px 16px;
+                justify-content: center;
+            }
+            .back-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            .back-panel-btn.floating {
+                left: 10px;
+                bottom: 10px;
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+        }
+        .back-panel-btn.floating {
+            position: fixed;
+            left: 30px;
+            bottom: 30px;
+            z-index: 999;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            box-shadow: 8px 8px 16px rgba(231, 76, 60, 0.3),
+                        -4px -4px 8px rgba(255, 255, 255, 0.1),
+                        inset 2px 2px 4px rgba(255, 255, 255, 0.2),
+                        inset -2px -2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+        }
+        .back-panel-btn.floating:hover {
+            transform: scale(1.15) translateY(-4px);
+            box-shadow: 12px 12px 20px rgba(231, 76, 60, 0.4),
+                        -6px -6px 12px rgba(255, 255, 255, 0.2),
+                        inset 3px 3px 6px rgba(255, 255, 255, 0.3),
+                        inset -3px -3px 6px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>
+                <span>📱</span>
+                <span>Protocolo WhatsApp Automático con Prime Sender</span>
+            </h1>
+            <p>
+                Contacta a todos tus contactos de WhatsApp de manera eficiente y profesional<br>
+                Sigue cada paso detalladamente para maximizar tus oportunidades de captación
+            </p>
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <!-- Introducción -->
+        <div class="intro-section">
+            <h2 class="intro-title">
+                <span>🎯</span>
+                <span>Objetivo del Protocolo</span>
+            </h2>
+            <p class="intro-text">
+                Este protocolo describe cómo usar la extensión <strong>Prime Sender</strong> en Google Chrome para contactar a tus contactos de WhatsApp de manera eficiente. 
+                Con esta herramienta podrás enviar mensajes masivos personalizados, optimizando tu tiempo y aumentando significativamente tus oportunidades de captación de propiedades.
+            </p>
+        </div>
+        
+        <!-- Paso 1 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <h2 class="step-title">Descarga tu Base de Contactos de Google</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>Abre Google y accede a la sección de <strong>Contactos</strong> (debe ser tu sesión personal de Gmail)</li>
+                        <li>Descarga tu base de datos en formato CSV:
+                            <ul class="sub-list">
+                                <li>Selecciona todos tus contactos</li>
+                                <li>Haz clic en la opción <strong>Exportar</strong> y elige <strong>CSV de Google</strong> como formato</li>
+                                <li>Guarda el archivo en una ubicación fácil de encontrar en tu computador</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <a href="https://contacts.google.com/" target="_blank" class="link-button">
+                        <span>📧</span>
+                        <span>Ir a Google Contactos</span>
+                    </a>
+                    <img src="https://lh3.googleusercontent.com/d/1K44KSykx0IorfVxLjQc4PEG0IAEyyh1P" alt="Página de Google Contactos mostrando el ícono de Contactos" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/1VWHF7ELf2U-5-uF6hjUlPwjzSh7lkfYb" alt="Vista de contactos con botón de exportar resaltado" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/1L5jaEZbS8kehOAhsaWLDDFAoyURADu4v" alt="Opciones de exportación con CSV de Google seleccionado" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 2 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">2</span>
+                    <h2 class="step-title">Instala la Extensión "Prime Sender"</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>Accede a la <strong>Chrome Web Store</strong></li>
+                        <li>Busca <strong>Prime Sender</strong> en la barra de búsqueda</li>
+                        <li>Haz clic en <strong>Agregar a Chrome</strong> y sigue las instrucciones para instalarla</li>
+                    </ol>
+                    <a href="https://chrome.google.com/webstore" target="_blank" class="link-button">
+                        <span>🛒</span>
+                        <span>Ir a Chrome Web Store</span>
+                    </a>
+                    <img src="https://lh3.googleusercontent.com/d/1SdFutJaYTEar5G0kw0shRJ7K0tJ6TyP5" alt="Chrome Web Store con buscador resaltado" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/1YgI9z3YABGZL1LVwoxZ2-fL1krJxA0Sr" alt="Página de Prime Sender en Chrome Web Store" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 3 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">3</span>
+                    <h2 class="step-title">Vincula tu WhatsApp Web</h2>
+                </div>
+                <div class="step-content">
+                    <p style="margin-bottom: 15px;">Vincula tu cuenta de WhatsApp con el navegador:</p>
+                    
+                    <div style="margin: 20px 0;">
+                        <p style="font-weight: 600; color: var(--primary); margin-bottom: 10px;">📱 En Android:</p>
+                        <ul class="sub-list">
+                            <li>Abre WhatsApp en tu dispositivo</li>
+                            <li>Toca el menú de tres puntos en la esquina superior derecha</li>
+                            <li>Selecciona <strong>Dispositivos Vinculados</strong></li>
+                            <li>Toca <strong>Vincular un Dispositivo</strong> y escanea el código QR</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <p style="font-weight: 600; color: var(--primary); margin-bottom: 10px;">🍎 En iPhone:</p>
+                        <ul class="sub-list">
+                            <li>Abre WhatsApp en tu dispositivo</li>
+                            <li>Ve a <strong>Configuración</strong></li>
+                            <li>Selecciona <strong>Dispositivos Vinculados</strong></li>
+                            <li>Toca <strong>Vincular un Dispositivo</strong> y escanea el código QR</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="https://web.whatsapp.com/" target="_blank" class="link-button">
+                        <span>💬</span>
+                        <span>Abrir WhatsApp Web</span>
+                    </a>
+                    <img src="https://lh3.googleusercontent.com/d/174h6JgjFSZlFK_oKST9MO0OmDZZus2in" alt="Código QR de WhatsApp Web" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 4 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">4</span>
+                    <h2 class="step-title">Carga tu Archivo de Contactos en Google Drive</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>Abre <strong>Google Drive</strong></li>
+                        <li>Haz clic en <strong>Nuevo</strong> → <strong>Subir Archivo</strong></li>
+                        <li>Selecciona el archivo CSV descargado en el paso 1</li>
+                        <li>Una vez cargado, ábrelo para visualizar tus contactos</li>
+                    </ol>
+                    <a href="https://drive.google.com/" target="_blank" class="link-button">
+                        <span>☁️</span>
+                        <span>Ir a Google Drive</span>
+                    </a>
+                    <img src="https://lh3.googleusercontent.com/d/1wReQIlMQ5GoE9aOCSIJy_XFHllqMUBsk" alt="Google Drive con botón Nuevo resaltado" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/1aN4-DbbdE9B6C9jygCQs1HvBPMv3omG0" alt="Archivo CSV abierto en Google Drive" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/16dwpPmkZ6B2J2oKdkKczlcFY3ezsVSd2" alt="Ventana de subida de archivo con opciones" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/12Am3YN-ksV8vVS0JOqa7A4DmL4LbCTMY" alt="Exportación desde Google Contactos con CSV de Google seleccionado" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 5 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">5</span>
+                    <h2 class="step-title">Copia los Números de Teléfono</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>En el archivo abierto en Google Drive, selecciona la columna que contiene los números de teléfono</li>
+                        <li>Copia únicamente los números (sin nombres ni correos)</li>
+                    </ol>
+                    <div class="warning-box">
+                        <strong>⚠️ Importante:</strong>
+                        Solo copia la columna de números telefónicos. No incluyas nombres, correos u otra información personal.
+                    </div>
+                    <img src="https://lh3.googleusercontent.com/d/1snfGLhTsE7v4tlFZOEl7jslr2p3UUNJr" alt="Archivo CSV con columna de teléfonos resaltada" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 6 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">6</span>
+                    <h2 class="step-title">Abre Prime Sender en WhatsApp Web</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>En la ventana de WhatsApp Web, haz clic en el ícono de extensiones en la esquina superior derecha del navegador</li>
+                        <li>Selecciona <strong>Prime Sender</strong></li>
+                        <li>Pega los números de teléfono en el área correspondiente</li>
+                        <li>Asegúrate de que la configuración de país esté seleccionada como <strong>Chile (+56)</strong></li>
+                    </ol>
+                    <div class="tip-box">
+                        <strong>💡 Consejo:</strong>
+                        Verifica que Prime Sender esté configurado correctamente con el código de país +56 para Chile antes de continuar.
+                    </div>
+                    <img src="https://lh3.googleusercontent.com/d/1LesXhl2OwebTMNTFwZ7l0GEICEkFUzFp" alt="Menú de extensiones con Prime Sender resaltado" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/1UrZvSHgfHSo7_rseW7OMIRCk8s-F9UiQ" alt="Interfaz de Prime Sender con área de números" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 7 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">7</span>
+                    <h2 class="step-title">Limpia los Números Erróneos</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>Revisa la lista de números cargados</li>
+                        <li>Elimina aquellos que no tengan formato chileno (+56)</li>
+                        <li>Quita números de otros países, ya que no serán útiles</li>
+                    </ol>
+                    <div class="tip-box">
+                        <strong>💡 Formato correcto:</strong>
+                        Solo mantén números con formato +56 9 XXXX XXXX. Esto asegurará que todos los mensajes lleguen correctamente.
+                    </div>
+                    <img src="https://lh3.googleusercontent.com/d/1J6JszEBPEvDnAjKDyPCUVI-kdYNoN4Xk" alt="Lista de números con formato inválido resaltado" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/11M5Seu5C000IeGD4Pmg0UetxLi1H9UFp" alt="Ventana de formato inválido con botón Remove All" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 8 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">8</span>
+                    <h2 class="step-title">Copia tu Mensaje</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>Ve al <strong>Panel Central de Protocolos</strong></li>
+                        <li>Abre el <strong>Protocolo de Script para Contactar Lista</strong></li>
+                        <li>Copia el script que más se acomode a tu estilo</li>
+                        <li>Si deseas, puedes personalizarlo o incluir enlaces a tus redes sociales</li>
+                    </ol>
+                    <div class="tip-box">
+                        <strong>✨ Recomendación:</strong>
+                        Personaliza el mensaje para hacerlo más auténtico y cercano. Agrega tu nombre y algún detalle personal que genere confianza.
+                    </div>
+                    <img src="https://lh3.googleusercontent.com/d/1y6JuXldtQ40PqH4hNEjliXdFCp7mzfJR" alt="Panel Central de Protocolos con script resaltado" class="step-image">
+                    <img src="https://lh3.googleusercontent.com/d/1hkurXFvIIxRG4bK7MgG4Hm0d2nNsD5RI" alt="Documento con scripts de contacto" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 9 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">9</span>
+                    <h2 class="step-title">Pega tu Mensaje en Prime Sender</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>Abre Prime Sender en WhatsApp Web</li>
+                        <li>Pega el mensaje en la casilla de texto para mensajes</li>
+                        <li>Asegúrate de revisarlo antes de continuar</li>
+                    </ol>
+                    <img src="https://lh3.googleusercontent.com/d/1gZyQ8R-GULbZKYIssXaJSTDAVcenunfY" alt="Prime Sender con opción Pegar resaltada" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 10 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">10</span>
+                    <h2 class="step-title">Ajusta el Intervalo de Envío</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>Configura el intervalo entre mensajes a <strong>3-5 segundos</strong></li>
+                        <li>Esto evitará bloqueos por parte de WhatsApp</li>
+                    </ol>
+                    <div class="warning-box">
+                        <strong>⚠️ Muy Importante:</strong>
+                        No uses intervalos menores a 3 segundos. WhatsApp puede detectar el envío masivo y restringir tu cuenta temporalmente.
+                    </div>
+                    <img src="https://lh3.googleusercontent.com/d/1NB-M4kQMUKf74AMcw-MVydStvJSGNfki" alt="Configuración de intervalo de tiempo en Prime Sender" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paso 11 -->
+        <div class="step-card">
+            <div class="step-accent"></div>
+            <div class="step-body">
+                <div class="step-header">
+                    <span class="step-number">11</span>
+                    <h2 class="step-title">Envía los Mensajes</h2>
+                </div>
+                <div class="step-content">
+                    <ol class="step-list">
+                        <li>Haz clic en <strong>Enviar</strong></li>
+                        <li>Espera a que el proceso se complete</li>
+                        <li><strong>NO cierres la ventana ni realices ninguna otra acción</strong> mientras los mensajes se envían</li>
+                    </ol>
+                    <div class="success-box">
+                        <strong>✅ ¡Éxito!</strong>
+                        Has completado el proceso. Los mensajes se enviarán automáticamente. Mantén la ventana abierta hasta que termine.
+                    </div>
+                    <img src="https://lh3.googleusercontent.com/d/1z174p636XwH7MVbGoeUh2LFzPDnUDSYY" alt="Prime Sender con botón de enviar resaltado" class="step-image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resumen -->
+        <div class="summary-section">
+            <h2 class="summary-title">🎯 Resumen del Protocolo</h2>
+            <p class="summary-text">
+                Este protocolo te permitirá contactar a todos tus contactos de WhatsApp de manera <strong>organizada y profesional</strong>, 
+                optimizando tu tiempo y aumentando significativamente tus oportunidades de captación de propiedades.
+                <br><br>
+                Recuerda siempre mantener un tono profesional y respetuoso en tus comunicaciones, 
+                y personalizar los mensajes cuando sea posible para generar mayor conexión con tus contactos.
+            </p>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">🏠 TuMatch Inmobiliario</div>
+            <div class="footer-info">
+                <div class="footer-item">
+                    <span>📧</span>
+                    <a href="mailto:corretaje@tumatchinmobiliario.cl">
+                        corretaje@tumatchinmobiliario.cl
+                    </a>
+                </div>
+                <div class="footer-item">
+                    <span>📱</span>
+                    <a href="https://wa.me/56934107448" target="_blank">
+                        +56 9 3410 7448
+                    </a>
+                </div>
+                <div class="footer-item">
+                    <span>🕐</span>
+                    <span>Lun-Vie 9:00-18:00</span>
+                </div>
+            </div>
+            <div style="width: 100px; height: 2px; background: linear-gradient(90deg, #e74c3c 0%, #ff6b6b 100%); margin: 30px auto;"></div>
+            <p style="font-size: 13px; color: rgba(255,255,255,0.6);">
+                © 2024 TuMatch Inmobiliario. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <a href="Inicio.html" class="back-panel-btn floating" title="Volver al Panel">
+        ←
+    </a>
+</body>
+</html>

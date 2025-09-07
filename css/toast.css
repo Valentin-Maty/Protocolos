@@ -1,0 +1,199 @@
+/* ===== TOAST NOTIFICATIONS ===== */
+
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    max-width: 350px;
+    pointer-events: none;
+}
+
+.toast {
+    background: var(--white);
+    color: var(--dark);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.toast::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--primary);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-success::before {
+    background: var(--success);
+}
+
+.toast-error::before {
+    background: var(--primary);
+}
+
+.toast-warning::before {
+    background: var(--warning);
+}
+
+.toast-info::before {
+    background: var(--info);
+}
+
+/* Search highlight styles */
+.search-highlight {
+    background: linear-gradient(135deg, rgba(241, 196, 15, 0.3) 0%, rgba(243, 156, 18, 0.3) 100%);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+/* No results styles */
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    margin: 40px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.no-results-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.no-results-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.no-results h3 {
+    font-size: 24px;
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+
+.no-results p {
+    color: var(--gray);
+    margin-bottom: 24px;
+}
+
+/* Search status */
+.search-status {
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 14px;
+    color: var(--gray);
+    background: rgba(231, 76, 60, 0.05);
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+}
+
+.search-status.no-results {
+    color: var(--primary);
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* Animation states */
+.filter-show {
+    animation: fadeInScale 0.3s ease forwards;
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    z-index: 9999;
+    transition: width 0.1s ease;
+}
+
+/* Loading states */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* App state classes */
+.app-ready {
+    /* Applied when app is fully loaded */
+}
+
+.slow-connection * {
+    animation-duration: 0.1s !important;
+    transition-duration: 0.1s !important;
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+.animations-paused * {
+    animation-play-state: paused !important;
+}
+
+.webp-support .webp-image {
+    /* Styles for when WebP is supported */
+}
+
+@media (max-width: 768px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .toast {
+        margin-bottom: 8px;
+    }
+}

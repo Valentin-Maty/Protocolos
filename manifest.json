@@ -1,0 +1,163 @@
+{
+  "name": "TuMatch Inmobiliario - Protocolos",
+  "short_name": "TuMatch Protocolos",
+  "description": "Sistema de gestión de protocolos y procedimientos para corredores inmobiliarios de TuMatch",
+  "start_url": "/Inicio.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#e74c3c",
+  "background_color": "#f8f9fa",
+  "scope": "/",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "education"],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Panel Principal",
+      "short_name": "Panel",
+      "description": "Acceso directo al panel principal de protocolos",
+      "url": "/Inicio.html",
+      "icons": [
+        {
+          "src": "/icons/shortcut-home.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "WhatsApp Automático",
+      "short_name": "WhatsApp",
+      "description": "Tutorial de WhatsApp automático",
+      "url": "/Wsp.html",
+      "icons": [
+        {
+          "src": "/icons/shortcut-whatsapp.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Manual Sistema",
+      "short_name": "Manual",
+      "description": "Manual del sistema multipublicación",
+      "url": "/Manual.html",
+      "icons": [
+        {
+          "src": "/icons/shortcut-manual.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Estudio de Mercado",
+      "short_name": "Mercado",
+      "description": "Guía para estudios de mercado",
+      "url": "/P5.html",
+      "icons": [
+        {
+          "src": "/icons/shortcut-market.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Panel principal en desktop"
+    },
+    {
+      "src": "/screenshots/mobile-home.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Panel principal en móvil"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "protocol_handlers": [],
+  "file_handlers": [],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

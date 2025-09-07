@@ -1,0 +1,108 @@
+/* ===== BASE STYLES ===== */
+
+/* Reset básico optimizado */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Mejoras de rendimiento y accesibilidad */
+html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%; /* Prevent font scaling in landscape */
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--dark);
+    background: #f8f9fa;
+    overflow-x: hidden;
+    /* Optimización de renderizado */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Mejoras de accesibilidad */
+*:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* Skip link para lectores de pantalla */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary);
+    color: var(--white);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    z-index: 10000;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Utilities para screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Optimización para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+    .card:hover,
+    .tool-card:hover,
+    .step-card:hover {
+        transform: none;
+    }
+}
+
+/* Loading state */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: wait;
+}
+
+/* Error states */
+.error {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+}

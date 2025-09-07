@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Sistema Multipublicación - TuMatch Inmobiliario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
+            --primary-light: #ff6b6b;
+            --secondary: #c44569;
+            --accent: #ff6b6b;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --light-gray: #ecf0f1;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(231, 76, 60, 0.1);
+            --shadow-lg: 0 10px 25px rgba(231, 76, 60, 0.15);
+            --success: #2ecc71;
+            --success-light: #27ae60;
+            --info: #3498db;
+            --info-light: #2980b9;
+            --warning: #f39c12;
+            --warning-light: #e67e22;
+            --purple: #9b59b6;
+            --purple-light: #8e44ad;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .header p {
+            font-size: 18px;
+            opacity: 0.95;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .toc-section {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border: 2px solid rgba(231, 76, 60, 0.1);
+        }
+        .toc-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .toc-list {
+            list-style: none;
+        }
+        .toc-list li {
+            margin-bottom: 12px;
+        }
+        .toc-list a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .toc-list a:hover {
+            background: rgba(231, 76, 60, 0.1);
+            transform: translateX(5px);
+        }
+        .toc-list .toc-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .section-container {
+            margin-bottom: 50px;
+        }
+        .section-header {
+            background: linear-gradient(135deg, var(--dark) 0%, #34495e 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 0;
+        }
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-content {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            padding: 30px;
+        }
+        .step-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary);
+        }
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .field-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        .field-item {
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 3px solid var(--info);
+        }
+        .field-item strong {
+            color: var(--dark);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        .field-item p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .field-item ul {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        .field-item ul li {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .warning-box {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .warning-box strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .info-box {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid #3498db;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .info-box strong {
+            color: #2980b9;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .tip-box {
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.05) 0%, rgba(243, 156, 18, 0.05) 100%);
+            border: 2px solid rgba(241, 196, 15, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .tip-box strong {
+            color: #f39c12;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .success-box {
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid #2ecc71;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .success-box strong {
+            color: #27ae60;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .note-box {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.05) 0%, rgba(142, 68, 173, 0.05) 100%);
+            border: 2px solid rgba(155, 89, 182, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .note-box strong {
+            color: #8e44ad;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .management-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e1e8ed;
+            transition: all 0.3s;
+        }
+        .management-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        .management-item h4 {
+            color: var(--dark);
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .management-item p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .quality-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .quality-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(39, 174, 96, 0.1) 100%);
+            border-radius: 12px;
+            border: 2px solid rgba(46, 204, 113, 0.2);
+        }
+        .quality-percentage {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--success);
+            display: block;
+            margin-bottom: 10px;
+        }
+        .quality-label {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        .highlight {
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.2) 0%, rgba(243, 156, 18, 0.2) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--warning-light);
+        }
+        .required {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .summary-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+        }
+        .summary-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .summary-text {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #34495e 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .footer-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+        .footer-item a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-item a:hover {
+            color: white;
+        }
+        .back-panel-btn.floating {
+            position: fixed;
+            left: 30px;
+            bottom: 30px;
+            z-index: 999;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(231, 76, 60, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            text-decoration: none;
+        }
+        .back-panel-btn.floating:hover {
+            transform: scale(1.12) translateY(-2px);
+            box-shadow: 0 16px 32px rgba(231, 76, 60, 0.35);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+        .screenshot-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #e1e8ed;
+            margin: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+                flex-direction: column;
+            }
+            .management-grid {
+                grid-template-columns: 1fr;
+            }
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+            .back-panel-btn.floating {
+                left: 10px;
+                bottom: 10px;
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>
+                <span>📚</span>
+                <span>Manual Sistema Multipublicación</span>
+            </h1>
+            <p>
+                Guía completa para el uso del sistema de publicación múltiple<br>
+                Gestión eficiente de propiedades en todos los portales
+            </p>
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <!-- Índice -->
+        <div class="toc-section">
+            <h2 class="toc-title">
+                <span>📑</span>
+                <span>Índice de Contenidos</span>
+            </h2>
+            <ul class="toc-list">
+                <li>
+                    <a href="#publicacion">
+                        <span class="toc-number">1</span>
+                        <span>Publicación en Sistema Multipublicación</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#gestion">
+                        <span class="toc-number">2</span>
+                        <span>Gestión de Publicaciones</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#encontrar">
+                        <span class="toc-number">3</span>
+                        <span>Encontrar una Publicación en Sistema</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#cambiar-estado">
+                        <span class="toc-number">4</span>
+                        <span>Cambiar de Estado la Publicación</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#republicador">
+                        <span class="toc-number">5</span>
+                        <span>Configuración para Sistema Republicador</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#calidad">
+                        <span class="toc-number">6</span>
+                        <span>Revisar Calidad de Publicaciones</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Sección 1: Publicación -->
+        <div id="publicacion" class="section-container">
+            <div class="section-header">
+                <h2>
+                    <span>📝</span>
+                    <span>Publicación en Sistema Multipublicación</span>
+                </h2>
+            </div>
+            <div class="section-content">
+                <div class="info-box">
+                    <strong>🚀 Para comenzar:</strong>
+                    Dirígete a <strong>Propiedades → Agregar propiedad</strong> en el menú principal del sistema.
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1tcQr6hYIYF1Sfr24cvXQUBgCq805AkCq" 
+                         alt="Menú Propiedades - Agregar propiedad" 
+                         class="screenshot-img">
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Importante:</strong>
+                    Los campos marcados con asterisco rojo (*) son obligatorios y deben ser completados para poder avanzar en la publicación.
+                </div>
+                
+                <!-- Paso 1 -->
+                <div class="step-section">
+                    <h3 class="step-title">
+                        <span class="step-number">1</span>
+                        <span>Tipo y Operación</span>
+                    </h3>
+                    
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/1ied9ZOJhY82iju7GMeksMd3DV1yLXErW" 
+                             alt="Paso 1 - Tipo y Operación" 
+                             class="screenshot-img">
+                    </div>
+                    
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <strong>1. Tipo de propiedad <span class="required">*</span></strong>
+                            <p>Selecciona el tipo que mejor se ajuste: Casa, Departamento, Oficina, Sitio, Local Comercial, Industrial, Agrícola, Parcela, Estacionamiento, Terreno Construcción, Bodega, Otro.</p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>2. Rol <span class="required">*</span></strong>
+                            <p>Puedes ingresar el rol real de la propiedad o usar valores como 1111, 9999. El rol real mejora el posicionamiento en los portales. Esta información es privada y solo visible para ti y los administradores.</p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>3. Operación Venta</strong>
+                            <ul>
+                                <li>Indica SI/NO si es operación de venta</li>
+                                <li>Precio en: Pesos Chilenos, UF o USD</li>
+                                <li>Valor m²: Solo para Bodegas</li>
+                                <li>Precio de Tasación: Opcional</li>
+                            </ul>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>4. Operación Arriendo</strong>
+                            <ul>
+                                <li>Indica SI/NO si es operación de arriendo</li>
+                                <li>Precio en: Pesos Chilenos, UF o USD</li>
+                                <li>Valor m²: Solo para Bodegas</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <strong>💡 Tip:</strong>
+                        Si la propiedad está en venta y arriendo simultáneamente, puedes marcar "Sí" en ambas opciones y completar la información correspondiente.
+                    </div>
+                    
+                    <div class="note-box">
+                        <strong>📌 Información adicional (opcional):</strong>
+                        Gastos comunes, Contribuciones, Deuda, Hipoteca, Banco. Puedes agregarla según tu criterio.
+                    </div>
+                </div>
+                
+                <!-- Paso 2 -->
+                <div class="step-section">
+                    <h3 class="step-title">
+                        <span class="step-number">2</span>
+                        <span>Ubicación</span>
+                    </h3>
+                    
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/1kbyAi6EtZ6_h84xsoEIwRa6R1CIOgCzE" 
+                             alt="Paso 2 - Ubicación" 
+                             class="screenshot-img">
+                    </div>
+                    
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <strong>1. Región <span class="required">*</span></strong>
+                            <p>Selecciona la región donde se ubica el inmueble.</p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>2. Comuna <span class="required">*</span></strong>
+                            <p>Indica la comuna donde está ubicada la propiedad.</p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>3. Sector</strong>
+                            <p>Opcional. Solo completar si la opción está disponible.</p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>4. Dirección exacta <span class="required">*</span></strong>
+                            <p>Necesaria para la georeferenciación. <span class="highlight">Esta información NO se publica en los portales.</span></p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>5. Dirección Referencial <span class="required">*</span></strong>
+                            <p>Esta es la dirección que verán los potenciales clientes en los portales.</p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>6. Configuración del Mapa</strong>
+                            <ul>
+                                <li>Verifica que la ubicación sea correcta</li>
+                                <li>Puedes mover el puntero rojo para ajustar</li>
+                                <li>Activa "Mostrar mapa en la ficha": SÍ</li>
+                                <li>Activa "Enviar coordenadas a portales": SÍ</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Paso 3 -->
+                <div class="step-section">
+                    <h3 class="step-title">
+                        <span class="step-number">3</span>
+                        <span>Características</span>
+                    </h3>
+                    
+                    <div class="info-box">
+                        <strong>⭐ Estrella Amarilla:</strong>
+                        Los campos marcados con estrella amarilla se publican en Portal Inmobiliario y Mercado Libre.
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/17-ioBGo7w3fkdf4mr3lcD6RohE4itTJl" 
+                             alt="Paso 3 - Características parte 1" 
+                             class="screenshot-img">
+                        <img src="https://lh3.googleusercontent.com/d/1QZIboHlFovmPC4ZMMCDDeExVWjPT_MCy" 
+                             alt="Paso 3 - Características parte 2" 
+                             class="screenshot-img">
+                    </div>
+                    
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <strong>Información esencial <span class="required">*</span></strong>
+                            <ul>
+                                <li>Dormitorios</li>
+                                <li>Baños</li>
+                                <li>Superficie Construida</li>
+                            </ul>
+                            <p>Estos datos son fundamentales para el posicionamiento de tu publicación.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Paso 4 -->
+                <div class="step-section">
+                    <h3 class="step-title">
+                        <span class="step-number">4</span>
+                        <span>Observaciones</span>
+                    </h3>
+                    
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/1n6FzAjQEBsnMnMVt2oAQna3hR0l0o9SN" 
+                             alt="Paso 4 - Observaciones" 
+                             class="screenshot-img">
+                    </div>
+                    
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <strong>1. Descripción de la propiedad</strong>
+                            <p>Generada automáticamente por IA (ChatGPT) según la información ingresada. Tonos recomendados: Neutro, Comercial o Profesional.</p>
+                            <div class="warning-box" style="margin-top: 10px;">
+                                <strong>⚠️ Evitar incluir:</strong>
+                                Precio, nombre del corredor o información de contacto (penalizado por los portales).
+                            </div>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>2. Forma de visitar <span class="required">*</span></strong>
+                            <p>Información interna para recordar cómo coordinar visitas. Ejemplo: "Juan tiene las llaves" o "Visitas de 18:00 a 19:00, jueves y viernes".</p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>3. Observaciones internas</strong>
+                            <p>Opcional. Para uso personal, no se publica.</p>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>4. Título</strong>
+                            <p>Título para Portal Inmobiliario y Mercado Libre. Otros portales generan títulos automáticos.</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Paso 5 -->
+                <div class="step-section">
+                    <h3 class="step-title">
+                        <span class="step-number">5</span>
+                        <span>Propietario</span>
+                    </h3>
+                    
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/1JAhVdmk4HbgiRDAdZtaLxlXwn5BVBtlN" 
+                             alt="Paso 5 - Propietario" 
+                             class="screenshot-img">
+                    </div>
+                    
+                    <div class="note-box">
+                        <strong>🔐 Información privada:</strong>
+                        Estos datos solo son visibles para ti y los administradores. No se publican en portales ni son visibles para otros corredores.
+                    </div>
+                    
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <strong>Datos del propietario</strong>
+                            <ul>
+                                <li>N° Documento (RUT o Pasaporte)</li>
+                                <li>Nombre y Apellido</li>
+                                <li>Celular</li>
+                                <li>Estado: Dejar activo</li>
+                                <li>Interés: Calificar con estrellas (1-5)</li>
+                            </ul>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>Tipo de cliente</strong>
+                            <p>Marca según corresponda: Comprador, Arrendatario, Vendedor, Arrendador</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Paso 6 -->
+                <div class="step-section">
+                    <h3 class="step-title">
+                        <span class="step-number">6</span>
+                        <span>Agregar Propiedad</span>
+                    </h3>
+                    
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/1XdCNnAu4cDS-9OeXO-m212n5b37l-VZu" 
+                             alt="Paso 6 - Agregar Propiedad" 
+                             class="screenshot-img">
+                    </div>
+                    
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <strong>Configuración inicial</strong>
+                            <ul>
+                                <li>Estado: <span class="highlight">No disponible</span> (inicial)</li>
+                                <li>Asignar a ejecutivo: Quedas asignado automáticamente</li>
+                                <li>Publicar en internet: <span class="highlight">SÍ</span></li>
+                                <li>Marcar como vendida: <span class="highlight">NO</span></li>
+                                <li>Marcar como arrendada: <span class="highlight">NO</span></li>
+                                <li>Destacado: NO (contactar administración si necesitas destacar)</li>
+                            </ul>
+                        </li>
+                        
+                        <li class="field-item">
+                            <strong>Portales de publicación</strong>
+                            <p>Desmarca solo los portales que no estén incluidos en tu plan para evitar cobros adicionales.</p>
+                        </li>
+                    </ul>
+                    
+                    <div class="success-box">
+                        <strong>✅ Al finalizar:</strong>
+                        Al presionar "Agregar propiedad", la publicación quedará en tu sistema lista para cargar imágenes y activar.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 2: Gestión -->
+        <div id="gestion" class="section-container">
+            <div class="section-header">
+                <h2>
+                    <span>⚙️</span>
+                    <span>Gestión de Publicaciones</span>
+                </h2>
+            </div>
+            <div class="section-content">
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1fKDPSORxnqG9Wl2VYyOSzOZwoSnrZSXR" 
+                         alt="Panel de Gestión de Publicaciones" 
+                         class="screenshot-img">
+                </div>
+                
+                <div class="management-grid">
+                    <div class="management-item">
+                        <h4><span>📷</span> Fotografía de portada</h4>
+                        <p>Primera imagen que aparecerá en todos los portales.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>🔢</span> Código de publicación</h4>
+                        <p>Identificador único en el sistema multipublicación.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>📊</span> Estado de publicación</h4>
+                        <p>No disponible, Activa o Pasiva según la integración con portales.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>📄</span> Resumen</h4>
+                        <p>Vista previa de cómo se verá la publicación.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>✏️</span> Editar</h4>
+                        <p>Modificar información de la publicación.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>🎥</span> Imágenes y video</h4>
+                        <p>Cargar material multimedia siguiendo las instrucciones.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>📁</span> Documentos</h4>
+                        <p>Adjuntar órdenes de venta, ofertas, etc.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>🔄</span> Estado configuración</h4>
+                        <p>Activar o desactivar publicaciones.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>📜</span> Bitácora</h4>
+                        <p>Historial completo de la publicación.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>👤</span> Propietario</h4>
+                        <p>Ver y cambiar propietario de la publicación.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>📈</span> Informes</h4>
+                        <p>Generar reportes automáticos de Portal Inmobiliario y Mercado Libre.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>📋</span> Ficha</h4>
+                        <p>Visualizar ficha completa de la propiedad.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>📢</span> Publicación</h4>
+                        <p>Ver contactos, responder consultas y estadísticas.</p>
+                    </div>
+                    
+                    <div class="management-item">
+                        <h4><span>📑</span> Duplicar</h4>
+                        <p>Copiar publicación para propiedades similares.</p>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>💡 Para cargar videos:</strong>
+                    Primero sube el video a YouTube con una cuenta pública, luego agrega el enlace en el sistema siguiendo las instrucciones del cuadro azul.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 3: Encontrar Publicación -->
+        <div id="encontrar" class="section-container">
+            <div class="section-header">
+                <h2>
+                    <span>🔍</span>
+                    <span>Encontrar una Publicación en Sistema</span>
+                </h2>
+            </div>
+            <div class="section-content">
+                <div class="info-box">
+                    <strong>📍 Ruta de acceso:</strong>
+                    Menú <strong>Propiedades → Propiedades</strong>
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1k4sqDZB3hTRZR1fkvMS273Q-VWZZzx03" 
+                         alt="Menú Propiedades" 
+                         class="screenshot-img">
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1HV2WaEG-HJdu0fnuBUeATcpHVAg5roiE" 
+                         alt="Buscador de propiedades" 
+                         class="screenshot-img">
+                </div>
+                
+                <ol class="field-list">
+                    <li class="field-item">
+                        <strong>1. Usar el buscador</strong>
+                        <p>Ingresa tu nombre de usuario según tus credenciales del sistema.</p>
+                    </li>
+                    
+                    <li class="field-item">
+                        <strong>2. Filtrar por estado</strong>
+                        <p>Por defecto muestra solo propiedades activas. Para ver todas (pasivas o no disponibles), haz clic en la "X" del filtro de estado activo.</p>
+                    </li>
+                </ol>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1BfdsRLA_udPkmbYmLkG5rROq-RtyM0U0" 
+                         alt="Editar propiedades activas y pasivas" 
+                         class="screenshot-img">
+                </div>
+                
+                <ol class="field-list" start="3">
+                    <li class="field-item">
+                        <strong>3. Filtros avanzados</strong>
+                        <p>Utiliza "Filtrar listado" para buscar por:</p>
+                        <ul>
+                            <li>Operación (Venta/Arriendo)</li>
+                            <li>Tipo de propiedad (Casa, Departamento, etc.)</li>
+                            <li>Captador específico</li>
+                            <li>Región o comuna</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1ue_xcvvaob47wgzXIKZvb-VZwiQNvuwF" 
+                         alt="Filtrar listado" 
+                         class="screenshot-img">
+                    <img src="https://lh3.googleusercontent.com/d/1UjXnbRs9zx-gBrwfF7nKJpJCqkMI9Bn_" 
+                         alt="Opciones de filtrado" 
+                         class="screenshot-img">
+                </div>
+                
+                <div class="success-box">
+                    <strong>✅ Tip rápido:</strong>
+                    Para editar cualquier publicación (activa o pasiva), simplemente haz clic en el botón "Editar" correspondiente.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 4: Cambiar Estado -->
+        <div id="cambiar-estado" class="section-container">
+            <div class="section-header">
+                <h2>
+                    <span>🔄</span>
+                    <span>Cambiar de Estado la Publicación</span>
+                </h2>
+            </div>
+            <div class="section-content">
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1QXBzOJu32VGNa9wf3SayK3-9WTgHt17j" 
+                         alt="Cambiar estado - Paso 1" 
+                         class="screenshot-img">
+                </div>
+                
+                <ol class="field-list">
+                    <li class="field-item">
+                        <strong>Acceso rápido</strong>
+                        <p>Haz clic en el recuadro con el nombre "Activo/Pasiva" para acceder directamente al menú de estado.</p>
+                    </li>
+                </ol>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1ao_3EKRUiOwuxoz9F2dNNTwLxwRqd0xv" 
+                         alt="Cambiar estado - Paso 2" 
+                         class="screenshot-img">
+                </div>
+                
+                <ol class="field-list" start="2">
+                    <li class="field-item">
+                        <strong>Cambiar estado</strong>
+                        <p>En el menú desplegable, selecciona el nuevo estado deseado (Activa o Pasiva) y presiona "Grabar".</p>
+                    </li>
+                </ol>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Importante:</strong>
+                    El cambio de estado puede tomar algunos minutos en reflejarse en todos los portales.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 5: Sistema Republicador -->
+        <div id="republicador" class="section-container">
+            <div class="section-header">
+                <h2>
+                    <span>🔁</span>
+                    <span>Configuración para Sistema Republicador</span>
+                </h2>
+            </div>
+            <div class="section-content">
+                <div class="warning-box">
+                    <strong>⚠️ Para propiedades vendidas o arrendadas:</strong>
+                    Es crucial configurar correctamente para evitar republicación automática.
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1sq-E1ILcs0apWE5VWjwTlFsGhiFtU7tx" 
+                         alt="Configuración Sistema Republicador" 
+                         class="screenshot-img">
+                </div>
+                
+                <div class="step-section">
+                    <h3>Configuración requerida:</h3>
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <strong>Estado: <span class="highlight">Pasiva</span></strong>
+                        </li>
+                        <li class="field-item">
+                            <strong>Publicar en internet: <span class="highlight">NO</span></strong>
+                        </li>
+                        <li class="field-item">
+                            <strong>Marcar como vendida: <span class="highlight">SÍ</span></strong>
+                            <p>(Si la propiedad fue vendida)</p>
+                        </li>
+                        <li class="field-item">
+                            <strong>Marcar como arrendada: <span class="highlight">SÍ</span></strong>
+                            <p>(Si la propiedad fue arrendada)</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="success-box">
+                    <strong>✅ Resultado:</strong>
+                    Con esta configuración, el sistema de republicación automática no volverá a publicar estas propiedades en los portales.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 6: Calidad -->
+        <div id="calidad" class="section-container">
+            <div class="section-header">
+                <h2>
+                    <span>⭐</span>
+                    <span>Revisar Calidad de Publicaciones</span>
+                </h2>
+            </div>
+            <div class="section-content">
+                <div class="info-box">
+                    <strong>📊 Para revisar la calidad:</strong>
+                    Haz clic en "Ver publicaciones" para acceder al panel de calidad y mejorar la exposición de tus publicaciones.
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/1msDOflIqEFv3eyIiVxn4JFLDsbItY5fL" 
+                         alt="Ver publicaciones" 
+                         class="screenshot-img">
+                </div>
+                
+                <div style="text-align: center;">
+                    <img src="https://lh3.googleusercontent.com/d/12uhoXEitrFrMFhaGIyGg4zggqvkarhjw" 
+                         alt="Panel de calidad" 
+                         class="screenshot-img">
+                </div>
+                
+                <div class="quality-section">
+                    <h3>Componentes de la Calidad (100% de exposición)</h3>
+                    
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/1OolA6EPidAdnbktGs0tVg5xN6wXHccXU" 
+                             alt="Detalle de calidad" 
+                             class="screenshot-img">
+                    </div>
+                    
+                    <div class="quality-grid">
+                        <div class="quality-item">
+                            <span class="quality-percentage">25%</span>
+                            <span class="quality-label">Atributos completos</span>
+                        </div>
+                        <div class="quality-item">
+                            <span class="quality-percentage">25%</span>
+                            <span class="quality-label">Mínimo de fotos</span>
+                        </div>
+                        <div class="quality-item">
+                            <span class="quality-percentage">25%</span>
+                            <span class="quality-label">Video/Tour virtual</span>
+                        </div>
+                        <div class="quality-item">
+                            <span class="quality-percentage">25%</span>
+                            <span class="quality-label">Publicación activa</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>💡 Recomendaciones para máxima exposición:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>• Completa todos los atributos disponibles</li>
+                        <li>• Sube al menos 10 fotos de buena calidad</li>
+                        <li>• Incluye un video o tour virtual</li>
+                        <li>• Mantén la información actualizada</li>
+                        <li>• Usa el Rol real cuando sea posible (mejora posicionamiento)</li>
+                    </ul>
+                </div>
+                
+                <div class="note-box">
+                    <strong>📌 Sobre el Rol:</strong>
+                    Aunque no es obligatorio usar el Rol real para Portal Inmobiliario/Mercado Libre, sí mejora significativamente el posicionamiento en otros portales. Recomendamos usarlo siempre que sea posible.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resumen -->
+        <div class="summary-section">
+            <h2 class="summary-title">🎯 Maximiza tu Éxito en Multipublicación</h2>
+            <p class="summary-text">
+                Este manual te proporciona todas las herramientas necesarias para gestionar 
+                eficientemente tus publicaciones en múltiples portales.
+                <br><br>
+                Recuerda que la <strong>calidad de la información</strong> y el <strong>material visual</strong> 
+                son fundamentales para aumentar la exposición y generar más contactos.
+                <br><br>
+                Mantén tus publicaciones actualizadas y sigue las mejores prácticas 
+                para obtener los mejores resultados en tu gestión inmobiliaria.
+            </p>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">🏠 TuMatch Inmobiliario</div>
+            <div class="footer-info">
+                <div class="footer-item">
+                    <span>📧</span>
+                    <a href="mailto:corretaje@tumatchinmobiliario.cl">
+                        corretaje@tumatchinmobiliario.cl
+                    </a>
+                </div>
+                <div class="footer-item">
+                    <span>📱</span>
+                    <a href="https://wa.me/56934107448" target="_blank">
+                        +56 9 3410 7448
+                    </a>
+                </div>
+                <div class="footer-item">
+                    <span>🕐</span>
+                    <span>Lun-Vie 9:00-18:00</span>
+                </div>
+            </div>
+            <div style="width: 100px; height: 2px; background: linear-gradient(90deg, #e74c3c 0%, #ff6b6b 100%); margin: 30px auto;"></div>
+            <p style="font-size: 13px; color: rgba(255,255,255,0.6);">
+                © 2024 TuMatch Inmobiliario. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <a href="Inicio.html" class="back-panel-btn floating" title="Volver al Panel">
+        ←
+    </a>
+</body>
+</html>
