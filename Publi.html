@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorial WhatsApp Automático con Prime Sender - TuMatch Inmobiliario</title>
+    <title>Protocolo de Publicación - TuMatch Inmobiliario</title>
     <style>
         * {
             margin: 0;
@@ -205,27 +205,51 @@
             line-height: 1;
         }
 
-        .sub-list {
-            margin-left: 20px;
-            margin-top: 10px;
-            list-style: none;
+        .credentials-table {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(41, 128, 185, 0.05) 100%);
+            border: 2px solid rgba(52, 152, 219, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
         }
 
-        .sub-list li {
-            padding: 8px 0 8px 25px;
-            font-size: 15px;
-            position: relative;
+        .credentials-table table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .sub-list li:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 14px;
-            width: 6px;
-            height: 6px;
-            background-color: var(--primary);
-            border-radius: 50%;
+        .credentials-table th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .credentials-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.1);
+            color: var(--dark);
+        }
+
+        .credentials-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .credentials-table a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .credentials-table a:hover {
+            color: #3498db;
+            text-decoration: underline;
         }
 
         .link-button {
@@ -249,6 +273,24 @@
         .link-button:hover {
             transform: scale(1.08) translateY(-2px);
             box-shadow: 0 8px 25px rgba(231, 76, 60, 0.35);
+        }
+
+        .link-button.secondary {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.25);
+        }
+
+        .link-button.secondary:hover {
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.35);
+        }
+
+        .link-button.green {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.25);
+        }
+
+        .link-button.green:hover {
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.35);
         }
 
         .warning-box {
@@ -296,13 +338,30 @@
             font-size: 16px;
         }
 
-        .step-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
+        .info-box {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid #3498db;
+            border-radius: 12px;
+            padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid #e1e8ed;
+        }
+
+        .info-box strong {
+            color: #2980b9;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .code-box {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            overflow-x: auto;
         }
 
         .summary-section {
@@ -431,10 +490,20 @@
             
             .back-button {
                 bottom: 20px;
-                left: 20px;
+                right: 20px;
                 width: 48px;
                 height: 48px;
                 font-size: 20px;
+            }
+
+            .credentials-table {
+                padding: 10px;
+            }
+
+            .credentials-table th,
+            .credentials-table td {
+                padding: 8px;
+                font-size: 14px;
             }
         }
         
@@ -474,12 +543,12 @@
     <header class="header">
         <div class="header-content">
             <h1>
-                <span>📱</span>
-                <span>Protocolo WhatsApp Automático con Prime Sender</span>
+                <span>📋</span>
+                <span>Protocolo de Publicación</span>
             </h1>
             <p>
-                Contacta a todos tus contactos de WhatsApp de manera eficiente y profesional<br>
-                Sigue cada paso detalladamente para maximizar tus oportunidades de captación
+                Proceso estandarizado para ingreso, publicación y seguimiento de propiedades<br>
+                Sistema CRM TuMatch Inmobiliario
             </p>
         </div>
     </header>
@@ -488,11 +557,12 @@
         <div class="intro-section">
             <h2 class="intro-title">
                 <span>🎯</span>
-                <span>Objetivo del Protocolo</span>
+                <span>Introducción</span>
             </h2>
             <p class="intro-text">
-                Este protocolo describe cómo usar la extensión <strong>Prime Sender</strong> en Google Chrome para contactar a tus contactos de WhatsApp de manera eficiente. 
-                Con esta herramienta podrás enviar mensajes masivos personalizados, optimizando tu tiempo y aumentando significativamente tus oportunidades de captación de propiedades.
+                Este protocolo tiene como objetivo <strong>estandarizar el proceso de ingreso, publicación y seguimiento de propiedades</strong> 
+                en el CRM de TuMatch Inmobiliario. Asegurando así una gestión eficiente y organizada de la información 
+                y comunicación con los interesados.
             </p>
         </div>
         
@@ -502,26 +572,43 @@
             <div class="step-body">
                 <div class="step-header">
                     <span class="step-number">1</span>
-                    <h2 class="step-title">Descarga tu Base de Contactos de Google</h2>
+                    <h2 class="step-title">Acceso a Convecta</h2>
                 </div>
                 <div class="step-content">
-                    <ol class="step-list">
-                        <li>Abre Google y accede a la sección de <strong>Contactos</strong> (debe ser tu sesión personal de Gmail)</li>
-                        <li>Descarga tu base de datos en formato CSV:
-                            <ul class="sub-list">
-                                <li>Selecciona todos tus contactos</li>
-                                <li>Haz clic en la opción <strong>Exportar</strong> y elige <strong>CSV de Google</strong> como formato</li>
-                                <li>Guarda el archivo en una ubicación fácil de encontrar en tu computador</li>
-                            </ul>
-                        </li>
-                    </ol>
-                    <a href="https://contacts.google.com/" target="_blank" class="link-button">
-                        <span>📧</span>
-                        <span>Ir a Google Contactos</span>
+                    <p style="margin-bottom: 15px;">
+                        Estas son las credenciales para ingresar a Convecta:
+                    </p>
+                    
+                    <div class="credentials-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Freelance - Convecta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Sistema Multipublicación</strong></td>
+                                    <td><a href="https://tumatchinmobiliario.prop360.cl" target="_blank">https://tumatchinmobiliario.prop360.cl</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Usuario</strong></td>
+                                    <td>portales@mail.tumatchinmobiliario.cl</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Contraseña</strong></td>
+                                    <td>Freelance#TuMatch25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <a href="https://tumatchinmobiliario.prop360.cl" 
+                       target="_blank" 
+                       class="link-button secondary">
+                        <span>🔐</span>
+                        <span>Acceder a Convecta</span>
                     </a>
-                    <img src="https://lh3.googleusercontent.com/d/1K44KSykx0IorfVxLjQc4PEG0IAEyyh1P" alt="Página de Google Contactos mostrando el ícono de Contactos" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/1VWHF7ELf2U-5-uF6hjUlPwjzSh7lkfYb" alt="Vista de contactos con botón de exportar resaltado" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/1L5jaEZbS8kehOAhsaWLDDFAoyURADu4v" alt="Opciones de exportación con CSV de Google seleccionado" class="step-image">
                 </div>
             </div>
         </div>
@@ -532,20 +619,26 @@
             <div class="step-body">
                 <div class="step-header">
                     <span class="step-number">2</span>
-                    <h2 class="step-title">Instala la Extensión "Prime Sender"</h2>
+                    <h2 class="step-title">Carga de Información de la Propiedad</h2>
                 </div>
                 <div class="step-content">
-                    <ol class="step-list">
-                        <li>Accede a la <strong>Chrome Web Store</strong></li>
-                        <li>Busca <strong>Prime Sender</strong> en la barra de búsqueda</li>
-                        <li>Haz clic en <strong>Agregar a Chrome</strong> y sigue las instrucciones para instalarla</li>
-                    </ol>
-                    <a href="https://chrome.google.com/webstore" target="_blank" class="link-button">
-                        <span>🛒</span>
-                        <span>Ir a Chrome Web Store</span>
-                    </a>
-                    <img src="https://lh3.googleusercontent.com/d/1SdFutJaYTEar5G0kw0shRJ7K0tJ6TyP5" alt="Chrome Web Store con buscador resaltado" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/1YgI9z3YABGZL1LVwoxZ2-fL1krJxA0Sr" alt="Página de Prime Sender en Chrome Web Store" class="step-image">
+                    <p style="margin-bottom: 15px;">
+                        <strong>Descripción:</strong> Una vez dentro de Convecta, es esencial cargar todos los detalles 
+                        relevantes de la propiedad que se desea vender o arrendar.
+                    </p>
+                    
+                    <ul class="step-list">
+                        <li>Completa todos los campos requeridos con la información de la propiedad, incluyendo descripción, 
+                            ubicación, precio, entre otros.</li>
+                        <li>Asegúrate de adjuntar <strong>fotografías de alta calidad con el sello de agua TuMatch Inmobiliario</strong> 
+                            y un video. Estos medios visuales son cruciales para atraer a posibles interesados.</li>
+                    </ul>
+                    
+                    <div class="tip-box">
+                        <strong>💡 Importante:</strong>
+                        Las fotografías deben incluir el sello de agua de TuMatch Inmobiliario. 
+                        Esto ayuda a mantener la identidad de marca y proteger nuestro contenido.
+                    </div>
                 </div>
             </div>
         </div>
@@ -556,36 +649,36 @@
             <div class="step-body">
                 <div class="step-header">
                     <span class="step-number">3</span>
-                    <h2 class="step-title">Vincula tu WhatsApp Web</h2>
+                    <h2 class="step-title">Notificación al Coordinador de Operaciones Comerciales</h2>
                 </div>
                 <div class="step-content">
-                    <p style="margin-bottom: 15px;">Vincula tu cuenta de WhatsApp con el navegador:</p>
+                    <p style="margin-bottom: 15px;">
+                        Una vez que la propiedad esté cargada en el sistema, es necesario informar a 
+                        <strong>Valentin Aguero</strong> y <strong>Francisco Garcia</strong> para que puedan proceder 
+                        con la activación de la publicación en los portales correspondientes.
+                    </p>
                     
-                    <div style="margin: 20px 0;">
-                        <p style="font-weight: 600; color: var(--primary); margin-bottom: 10px;">📱 En Android:</p>
-                        <ul class="sub-list">
-                            <li>Abre WhatsApp en tu dispositivo</li>
-                            <li>Toca el menú de tres puntos en la esquina superior derecha</li>
-                            <li>Selecciona <strong>Dispositivos Vinculados</strong></li>
-                            <li>Toca <strong>Vincular un Dispositivo</strong> y escanea el código QR</li>
-                        </ul>
-                    </div>
+                    <ul class="step-list">
+                        <li>Localiza el código de publicación generado por Convecta para la propiedad ingresada.</li>
+                        <li>Ingresa a <strong>Back Office</strong>, ve a Contratos y llena el Formulario de Activación de Publicación.</li>
+                    </ul>
                     
-                    <div style="margin: 20px 0;">
-                        <p style="font-weight: 600; color: var(--primary); margin-bottom: 10px;">🍎 En iPhone:</p>
-                        <ul class="sub-list">
-                            <li>Abre WhatsApp en tu dispositivo</li>
-                            <li>Ve a <strong>Configuración</strong></li>
-                            <li>Selecciona <strong>Dispositivos Vinculados</strong></li>
-                            <li>Toca <strong>Vincular un Dispositivo</strong> y escanea el código QR</li>
-                        </ul>
-                    </div>
-                    
-                    <a href="https://web.whatsapp.com/" target="_blank" class="link-button">
-                        <span>💬</span>
-                        <span>Abrir WhatsApp Web</span>
+                    <a href="https://backoffice.propital.com/" 
+                       target="_blank" 
+                       class="link-button green">
+                        <span>📝</span>
+                        <span>Acceder a Back Office</span>
                     </a>
-                    <img src="https://lh3.googleusercontent.com/d/174h6JgjFSZlFK_oKST9MO0OmDZZus2in" alt="Código QR de WhatsApp Web" class="step-image">
+                    
+                    <div class="info-box">
+                        <strong>📋 Proceso de Notificación:</strong>
+                        <ol class="step-list">
+                            <li>Obtén el código de publicación de Convecta</li>
+                            <li>Accede a Back Office</li>
+                            <li>Dirígete a la sección "Contratos"</li>
+                            <li>Completa el Formulario de Activación de Publicación</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
@@ -596,23 +689,30 @@
             <div class="step-body">
                 <div class="step-header">
                     <span class="step-number">4</span>
-                    <h2 class="step-title">Carga tu Archivo de Contactos en Google Drive</h2>
+                    <h2 class="step-title">Publicación en Portales</h2>
                 </div>
                 <div class="step-content">
-                    <ol class="step-list">
-                        <li>Abre <strong>Google Drive</strong></li>
-                        <li>Haz clic en <strong>Nuevo</strong> → <strong>Subir Archivo</strong></li>
-                        <li>Selecciona el archivo CSV descargado en el paso 1</li>
-                        <li>Una vez cargado, ábrelo para visualizar tus contactos</li>
-                    </ol>
-                    <a href="https://drive.google.com/" target="_blank" class="link-button">
-                        <span>☁️</span>
-                        <span>Ir a Google Drive</span>
-                    </a>
-                    <img src="https://lh3.googleusercontent.com/d/1wReQIlMQ5GoE9aOCSIJy_XFHllqMUBsk" alt="Google Drive con botón Nuevo resaltado" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/1aN4-DbbdE9B6C9jygCQs1HvBPMv3omG0" alt="Archivo CSV abierto en Google Drive" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/16dwpPmkZ6B2J2oKdkKczlcFY3ezsVSd2" alt="Ventana de subida de archivo con opciones" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/12Am3YN-ksV8vVS0JOqa7A4DmL4LbCTMY" alt="Exportación desde Google Contactos con CSV de Google seleccionado" class="step-image">
+                    <p style="margin-bottom: 15px;">
+                        <strong>Descripción:</strong> Valentin Aguero y Francisco Garcia se encargarán de activar 
+                        la propiedad en los portales asociados.
+                    </p>
+                    
+                    <div class="success-box">
+                        <strong>✅ Portales de Publicación:</strong>
+                        Una vez aprobada, tu propiedad será publicada en los principales portales inmobiliarios:
+                        <ul class="step-list" style="margin-top: 10px;">
+                            <li>Portal Inmobiliario</li>
+                            <li>TocToc</li>
+                            <li>Yapo</li>
+                            <li>Y otros portales asociados</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Nota:</strong>
+                        Este proceso es gestionado por el equipo de coordinación. 
+                        No es necesario que realices ninguna acción adicional en este paso.
+                    </div>
                 </div>
             </div>
         </div>
@@ -623,169 +723,51 @@
             <div class="step-body">
                 <div class="step-header">
                     <span class="step-number">5</span>
-                    <h2 class="step-title">Copia los Números de Teléfono</h2>
+                    <h2 class="step-title">Derivación de Leads</h2>
                 </div>
                 <div class="step-content">
-                    <ol class="step-list">
-                        <li>En el archivo abierto en Google Drive, selecciona la columna que contiene los números de teléfono</li>
-                        <li>Copia únicamente los números (sin nombres ni correos)</li>
-                    </ol>
+                    <p style="margin-bottom: 15px;">
+                        <strong>Descripción:</strong> Todos los interesados o leads que se generen a partir de las 
+                        publicaciones serán dirigidos a ti mediante mensaje por Valentin Aguero o Francisco Garcia.
+                    </p>
+                    
+                    <div class="info-box">
+                        <strong>📧 Gestión de Leads:</strong>
+                        Como corredor, serás el encargado de gestionar y dar seguimiento a estos leads de acuerdo 
+                        a las propiedades que hayas publicado.
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>💡 Mejores Prácticas:</strong>
+                        <ul class="step-list" style="margin-top: 10px;">
+                            <li>Responde a los leads en un máximo de 2 horas durante horario laboral</li>
+                            <li>Mantén un registro actualizado de todas las interacciones</li>
+                            <li>Programa visitas y seguimientos de manera proactiva</li>
+                            <li>Actualiza el estado de los leads en el sistema regularmente</li>
+                        </ul>
+                    </div>
+                    
                     <div class="warning-box">
-                        <strong>⚠️ Importante:</strong>
-                        Solo copia la columna de números telefónicos. No incluyas nombres, correos u otra información personal.
+                        <strong>⚠️ Nota Importante:</strong>
+                        Es fundamental seguir este protocolo al pie de la letra para garantizar una gestión eficiente 
+                        y evitar posibles confusiones o pérdidas de información.
                     </div>
-                    <img src="https://lh3.googleusercontent.com/d/1snfGLhTsE7v4tlFZOEl7jslr2p3UUNJr" alt="Archivo CSV con columna de teléfonos resaltada" class="step-image">
-                </div>
-            </div>
-        </div>
-        
-        <!-- Paso 6 -->
-        <div class="step-card">
-            <div class="step-accent"></div>
-            <div class="step-body">
-                <div class="step-header">
-                    <span class="step-number">6</span>
-                    <h2 class="step-title">Abre Prime Sender en WhatsApp Web</h2>
-                </div>
-                <div class="step-content">
-                    <ol class="step-list">
-                        <li>En la ventana de WhatsApp Web, haz clic en el ícono de extensiones en la esquina superior derecha del navegador</li>
-                        <li>Selecciona <strong>Prime Sender</strong></li>
-                        <li>Pega los números de teléfono en el área correspondiente</li>
-                        <li>Asegúrate de que la configuración de país esté seleccionada como <strong>Chile (+56)</strong></li>
-                    </ol>
-                    <div class="tip-box">
-                        <strong>💡 Consejo:</strong>
-                        Verifica que Prime Sender esté configurado correctamente con el código de país +56 para Chile antes de continuar.
-                    </div>
-                    <img src="https://lh3.googleusercontent.com/d/1LesXhl2OwebTMNTFwZ7l0GEICEkFUzFp" alt="Menú de extensiones con Prime Sender resaltado" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/1UrZvSHgfHSo7_rseW7OMIRCk8s-F9UiQ" alt="Interfaz de Prime Sender con área de números" class="step-image">
-                </div>
-            </div>
-        </div>
-        
-        <!-- Paso 7 -->
-        <div class="step-card">
-            <div class="step-accent"></div>
-            <div class="step-body">
-                <div class="step-header">
-                    <span class="step-number">7</span>
-                    <h2 class="step-title">Limpia los Números Erróneos</h2>
-                </div>
-                <div class="step-content">
-                    <ol class="step-list">
-                        <li>Revisa la lista de números cargados</li>
-                        <li>Elimina aquellos que no tengan formato chileno (+56)</li>
-                        <li>Quita números de otros países, ya que no serán útiles</li>
-                    </ol>
-                    <div class="tip-box">
-                        <strong>💡 Formato correcto:</strong>
-                        Solo mantén números con formato +56 9 XXXX XXXX. Esto asegurará que todos los mensajes lleguen correctamente.
-                    </div>
-                    <img src="https://lh3.googleusercontent.com/d/1J6JszEBPEvDnAjKDyPCUVI-kdYNoN4Xk" alt="Lista de números con formato inválido resaltado" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/11M5Seu5C000IeGD4Pmg0UetxLi1H9UFp" alt="Ventana de formato inválido con botón Remove All" class="step-image">
-                </div>
-            </div>
-        </div>
-        
-        <!-- Paso 8 -->
-        <div class="step-card">
-            <div class="step-accent"></div>
-            <div class="step-body">
-                <div class="step-header">
-                    <span class="step-number">8</span>
-                    <h2 class="step-title">Copia tu Mensaje</h2>
-                </div>
-                <div class="step-content">
-                    <ol class="step-list">
-                        <li>Ve al <strong>Panel Central de Protocolos</strong></li>
-                        <li>Abre el <strong>Protocolo de Script para Contactar Lista</strong></li>
-                        <li>Copia el script que más se acomode a tu estilo</li>
-                        <li>Si deseas, puedes personalizarlo o incluir enlaces a tus redes sociales</li>
-                    </ol>
-                    <div class="tip-box">
-                        <strong>✨ Recomendación:</strong>
-                        Personaliza el mensaje para hacerlo más auténtico y cercano. Agrega tu nombre y algún detalle personal que genere confianza.
-                    </div>
-                    <img src="https://lh3.googleusercontent.com/d/1y6JuXldtQ40PqH4hNEjliXdFCp7mzfJR" alt="Panel Central de Protocolos con script resaltado" class="step-image">
-                    <img src="https://lh3.googleusercontent.com/d/1hkurXFvIIxRG4bK7MgG4Hm0d2nNsD5RI" alt="Documento con scripts de contacto" class="step-image">
-                </div>
-            </div>
-        </div>
-        
-        <!-- Paso 9 -->
-        <div class="step-card">
-            <div class="step-accent"></div>
-            <div class="step-body">
-                <div class="step-header">
-                    <span class="step-number">9</span>
-                    <h2 class="step-title">Pega tu Mensaje en Prime Sender</h2>
-                </div>
-                <div class="step-content">
-                    <ol class="step-list">
-                        <li>Abre Prime Sender en WhatsApp Web</li>
-                        <li>Pega el mensaje en la casilla de texto para mensajes</li>
-                        <li>Asegúrate de revisarlo antes de continuar</li>
-                    </ol>
-                    <img src="https://lh3.googleusercontent.com/d/1gZyQ8R-GULbZKYIssXaJSTDAVcenunfY" alt="Prime Sender con opción Pegar resaltada" class="step-image">
-                </div>
-            </div>
-        </div>
-        
-        <!-- Paso 10 -->
-        <div class="step-card">
-            <div class="step-accent"></div>
-            <div class="step-body">
-                <div class="step-header">
-                    <span class="step-number">10</span>
-                    <h2 class="step-title">Ajusta el Intervalo de Envío</h2>
-                </div>
-                <div class="step-content">
-                    <ol class="step-list">
-                        <li>Configura el intervalo entre mensajes a <strong>3-5 segundos</strong></li>
-                        <li>Esto evitará bloqueos por parte de WhatsApp</li>
-                    </ol>
-                    <div class="warning-box">
-                        <strong>⚠️ Muy Importante:</strong>
-                        No uses intervalos menores a 3 segundos. WhatsApp puede detectar el envío masivo y restringir tu cuenta temporalmente.
-                    </div>
-                    <img src="https://lh3.googleusercontent.com/d/1NB-M4kQMUKf74AMcw-MVydStvJSGNfki" alt="Configuración de intervalo de tiempo en Prime Sender" class="step-image">
-                </div>
-            </div>
-        </div>
-        
-        <!-- Paso 11 -->
-        <div class="step-card">
-            <div class="step-accent"></div>
-            <div class="step-body">
-                <div class="step-header">
-                    <span class="step-number">11</span>
-                    <h2 class="step-title">Envía los Mensajes</h2>
-                </div>
-                <div class="step-content">
-                    <ol class="step-list">
-                        <li>Haz clic en <strong>Enviar</strong></li>
-                        <li>Espera a que el proceso se complete</li>
-                        <li><strong>NO cierres la ventana ni realices ninguna otra acción</strong> mientras los mensajes se envían</li>
-                    </ol>
-                    <div class="success-box">
-                        <strong>✅ ¡Éxito!</strong>
-                        Has completado el proceso. Los mensajes se enviarán automáticamente. Mantén la ventana abierta hasta que termine.
-                    </div>
-                    <img src="https://lh3.googleusercontent.com/d/1z174p636XwH7MVbGoeUh2LFzPDnUDSYY" alt="Prime Sender con botón de enviar resaltado" class="step-image">
                 </div>
             </div>
         </div>
         
         <!-- Resumen -->
         <div class="summary-section">
-            <h2 class="summary-title">🎯 Resumen del Protocolo</h2>
+            <h2 class="summary-title">📋 Resumen del Protocolo</h2>
             <p class="summary-text">
-                Este protocolo te permitirá contactar a todos tus contactos de WhatsApp de manera <strong>organizada y profesional</strong>, 
-                optimizando tu tiempo y aumentando significativamente tus oportunidades de captación de propiedades.
+                El protocolo de publicación garantiza un proceso <strong>eficiente y estandarizado</strong> 
+                para todas las propiedades.
                 <br><br>
-                Recuerda siempre mantener un tono profesional y respetuoso en tus comunicaciones, 
-                y personalizar los mensajes cuando sea posible para generar mayor conexión con tus contactos.
+                Siguiendo estos 5 pasos, aseguras que tu propiedad sea publicada correctamente en todos 
+                los portales y que los leads sean gestionados de manera profesional.
+                <br><br>
+                Recuerda que el éxito en la gestión inmobiliaria depende del cumplimiento 
+                riguroso de estos procedimientos y la comunicación efectiva con el equipo.
             </p>
         </div>
     </div>

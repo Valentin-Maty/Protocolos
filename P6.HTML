@@ -452,6 +452,37 @@
                 font-size: 24px;
             }
         }
+        
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        
+        .fab.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .fab:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -499,7 +530,6 @@
                         de una solicitud recibida o de una búsqueda activa de oportunidades de venta.
                     </p>
                     <a href="Protocolo 4.html" 
-                       target="_blank" 
                        class="step-link">
                         <span>📖</span>
                         <span>Ver Protocolo</span>
@@ -555,7 +585,6 @@
                     <strong>📚 Manual del Sistema:</strong>
                     Consulta el manual de uso del sistema para gestionar publicaciones de manera efectiva.
                     <a href="Manual.html" 
-                       target="_blank" 
                        style="color: #2980b9; font-weight: 600; text-decoration: none; display: inline-block; margin-top: 10px;">
                         Ver Manual de Uso del Sistema →
                     </a>
@@ -570,8 +599,7 @@
                         El corredor inmobiliario se encarga de publicar la propiedad en diferentes plataformas 
                         y medios para promover su venta y atraer posibles interesados.
                     </p>
-                    <a href="https://docs.google.com/document/d/19kapnlBlAUp4VO3C_MvMoVrMxhFQrAFJ" 
-                       target="_blank" 
+                    <a href="Publi.html" 
                        class="step-link">
                         <span>📖</span>
                         <span>Ver Protocolo</span>
@@ -839,8 +867,26 @@
         </div>
     </footer>
 
-    <a href="Inicio.html" class="back-panel-btn floating" title="Volver al Panel">
+    <a href="#" onclick="history.back(); return false;" class="back-panel-btn floating" title="Volver a la página anterior">
         ←
     </a>
+    
+    <div class="fab" id="scrollTop" onclick="scrollToTop()">↑</div>
+    
+    <script>
+        // Scroll to top functionality
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        });
+        
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
