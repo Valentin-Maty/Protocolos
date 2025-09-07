@@ -1,0 +1,20 @@
+{
+  "name": "protocolo",
+  "version": "1.0.0",
+  "description": "Protocolos tumatch",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Valentin-Maty/Protocolos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Valentin-Maty/Protocolos/issues"
+  },
+  "homepage": "https://github.com/Valentin-Maty/Protocolos#readme"
+}
