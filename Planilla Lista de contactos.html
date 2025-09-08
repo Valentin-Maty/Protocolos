@@ -70,25 +70,30 @@
         
         .dark-mode-toggle {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
             background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            padding: 10px 15px;
-            border-radius: 25px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 600;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .dark-mode-toggle:hover {
+            transform: scale(1.05);
             background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
         }
 
         .header::before {
@@ -619,6 +624,23 @@
                 width: 48px;
                 height: 48px;
                 font-size: 24px;
+            }
+            .dark-mode-toggle {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+                top: 12px;
+                right: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dark-mode-toggle {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+                top: 10px;
+                right: 10px;
             }
         }
         
@@ -1278,7 +1300,7 @@
 </head>
 <body>
     <header class="header">
-        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Cambiar tema">
             <span id="theme-icon">🌙</span>
         </button>
         <div class="header-content">

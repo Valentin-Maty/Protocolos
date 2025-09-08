@@ -70,25 +70,51 @@
        
        .dark-mode-toggle {
            position: absolute;
-           top: 20px;
-           right: 20px;
+           top: 15px;
+           right: 15px;
+           width: 40px;
+           height: 40px;
            background: rgba(255, 255, 255, 0.2);
-           border: 2px solid rgba(255, 255, 255, 0.3);
-           color: white;
-           padding: 10px 15px;
-           border-radius: 25px;
-           cursor: pointer;
-           font-size: 16px;
-           font-weight: 600;
-           transition: all 0.3s ease;
            backdrop-filter: blur(10px);
+           border: 1px solid rgba(255, 255, 255, 0.3);
+           color: white;
+           border-radius: 50%;
+           cursor: pointer;
+           font-size: 20px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.3s ease;
+           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
            z-index: 1000;
        }
        
        .dark-mode-toggle:hover {
            background: rgba(255, 255, 255, 0.3);
-           transform: translateY(-2px);
+           transform: scale(1.05);
            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+       }
+       
+       /* Estilos específicos para móvil */
+       @media (max-width: 768px) {
+           .dark-mode-toggle {
+               width: 35px;
+               height: 35px;
+               font-size: 18px;
+               top: 10px;
+               right: 10px;
+           }
+       }
+       
+       /* Para pantallas muy pequeñas */
+       @media (max-width: 480px) {
+           .dark-mode-toggle {
+               width: 32px;
+               height: 32px;
+               font-size: 16px;
+               top: 8px;
+               right: 8px;
+           }
        }
 
        .header::before {
@@ -901,8 +927,8 @@
 </head>
 <body>
    <header class="header">
-       <button class="dark-mode-toggle" onclick="toggleDarkMode()">
-           <span id="theme-icon">🌙</span>
+       <button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Cambiar tema">
+           <span id="theme-icon">☀️</span>
        </button>
        <div class="header-content">
            <h1>🏠 Panel Central de Protocolos</h1>
